@@ -27,9 +27,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 RECAPTCHA_SECRET_KEY = "6LeMRm4qAAAAAPslEmmSL7zQBpwLV-YHw0R99ytB"
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-# Application definition
 
 INSTALLED_APPS = [
     'users',
