@@ -91,3 +91,4 @@ def accept_invite(request, group_id):
     else:
         messages.error(request, "Invalid invitation link.")  
     return redirect('chipin:group_detail', group_id=group.id) 
+    
