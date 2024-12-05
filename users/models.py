@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -31,6 +33,7 @@ class Profile(models.Model):
     max_spend = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)  # Max spend for each event
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)  # User's current balance
 
+
     def clean(self):
         validate_unique_nickname(self.nickname, instance=self)
 
@@ -39,4 +42,10 @@ class Profile(models.Model):
         super().save(*args, **kwargs)    
 
     def __str__(self):
-        return self.user.username
+        return f"self.user.username - ${self.balance}" 
+    
+
+class Transcation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
