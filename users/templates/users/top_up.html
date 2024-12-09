@@ -5,7 +5,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p}}
-        <button type="submit" class="btn btn-primary">Confrim</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
     </form>
     <a href="{% url 'users:user' %}" >Back to Homepage</a>
 {% endblock %}
