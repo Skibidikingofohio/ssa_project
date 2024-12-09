@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nid7#ot($yb04=glh*h0w_x_uq@+rbp75+#dq9#6(lk2mlnnod'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-RECAPTCHA_SECRET_KEY = "6LeMRm4qAAAAAPslEmmSL7zQBpwLV-YHw0R99ytB"
+RECAPTCHA_SECRET_KEY = "6LeD3XQqAAAAAJZj4y9IUWEyC8fzVsQG8Jc1qeH1"
 
 INSTALLED_APPS = [
     'users',
