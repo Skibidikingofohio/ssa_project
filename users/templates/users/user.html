@@ -3,29 +3,87 @@
 {% block title %}User Management{% endblock %}
 
 {% block content %} 
-    <h2>Welcome {{ request.user.first_name }}</h2>
-    <p>This page is for user management functions.</p>
-    <p>Your current balance is: ${{ balance }}</p>
-    <a href="{% url 'users:top_up' %}">Top Up Balance</a>
-    <br></br>
-    <a href="{% url 'chipin:home' %}">Click through to ChipIn Functions</a>
-    <h3> Your Transactoin History:</h3>
-    {% if transactions %}
-        <div>
-            <table>
+<style>
+    /* Import a Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+        background-color: #f2dbb7;
+        font-family: 'Roboto', sans-serif; /* Applying Roboto font to the entire body */
+    }
+
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700; /* Bold style */
+    }
+
+    p, a {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400; /* Regular style */
+    }
+
+    /* Table styling */
+    table {
+        width: 50%; /*sets width for transcation table*/
+        border-collapse: collapse;
+        margin-left: 0;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        text-align: left;
+        padding: 8px;
+        word-wrap: break-word;
+        max-width: 200px; 
+    }
+
+    td {
+        text-overflow: ellipsis; /* adds ellipsis for long text */
+        overflow: hidden;
+        white-space: nowrap; /* prevents text wrapping */
+    }
+
+    th {
+        background-color: #e6c497; /* darker background for headers */
+        font-weight: 700;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #f9f9f9; /* alternating row colors */
+    }
+
+    tr:hover td {
+        background-color: #f5e1c0;
+    }
+</style>
+
+<h2>Welcome {{ request.user.first_name }}</h2>
+<p>This page is for user management functions.</p>
+<p>Your current balance is: ${{ balance }}</p>
+<a href="{% url 'users:top_up' %}">Top Up Balance</a>
+<br></br>
+<a href="{% url 'chipin:home' %}">Click through to ChipIn Functions</a>
+<h3>Your Transaction History:</h3>
+{% if transactions %}
+    <div>
+        <table>
+            <thead>
                 <tr>
-                    <td>Amount </td>
-                    <td>Date </td>
+                    <th>Amount</th>
+                    <th>Date</th>
                 </tr>
-                {%for transaction in transactions %}
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
                 <tr>
-                    <th>${{ transaction.amount }}</th>
-                    <th>{{ transaction.created_at }}</th>
+                    <td>${{ transaction.amount }}</td>
+                    <td>{{ transaction.created_at|date:"M d, Y h:i" }}</td>
                 </tr>
-                {% endfor%}
-            </table>
-        </div>
-    {% else %}
-        <p>No transaction to display.</p>
-    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p>No transactions to display.</p>
+{% endif %}
 {% endblock %}

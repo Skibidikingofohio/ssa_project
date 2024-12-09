@@ -9,14 +9,9 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from decimal import Decimal
 from users.models import Transcation
-
 from .forms import GroupCreationForm, CommentForm
 from .models import Group, Comment, GroupJoinRequest, Event
-
 from chipin.models import Event
- 
-# from datetime import datatime
-
 import urllib.parse
 
 def transfer_funds(request, group_id, event_id):
@@ -35,7 +30,6 @@ def transfer_funds(request, group_id, event_id):
     if archive == True:
         messages.success(request, "This event is now being archived")
         event.archive_event()
-
     
     for member in event.members.all():
         profile = member.profile
@@ -47,8 +41,6 @@ def transfer_funds(request, group_id, event_id):
         messages.error(request, f"not all members have sufficinet funds")
         return redirect('chipin:group_detail', group_id=group.id)
     
-
-
     with transaction.atomic():
         for member in event.members.all():
             profile = member.profile
@@ -56,7 +48,6 @@ def transfer_funds(request, group_id, event_id):
             profile.balance -= event_share 
             profile.save()
             Transcation.objects.create(user=member, amount=-event_share)
-            
 
         if request.user == group.admin:
             profile = request.user.profile
@@ -69,12 +60,9 @@ def transfer_funds(request, group_id, event_id):
         else:
             messages.error(request, "you are not the admin")
 
-
         event.save()
         messages.success(request, "Funds transferred")
         return redirect('chipin:group_detail', group_id=group.id)
-
-
 
     messages.error(request, "there was an error")
     return redirect('chipin:group_detail', group_id=group.id)
@@ -406,4 +394,4 @@ def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     if comment.user == request.user or request.user == comment.group.admin:  # Allow author or group admin to delete
         comment.delete()
-    return redirect('chipin:group_detail', group_id=comment.group.id)
+    return redirect('chipin:group_detail', group_id=comment.group.id) 
