@@ -5,10 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegistrationForm, UserTopUp
-from .models import Transcation, Profile
+from .models import Transcation
 import requests
 from django.conf import settings
-
 
 def register(request):
     if request.method == "POST":
@@ -21,21 +20,41 @@ def register(request):
         form = UserRegistrationForm()
     return render(request, 'users/register.html', {'form': form})
 
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Successfully logged out.")
+    return redirect('users:login')
 
-@login_required(login_url='users:login')
-def user(request):
-    # Check if the user has a profile, create one if missing
-    if not hasattr(request.user, 'profile'):
-        Profile.objects.create(user=request.user)
-
-    profile = request.user.profile  # Safe to access now
-    transactions = Transcation.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, "users/user.html", {
-        'user': request.user,
-        'balance': profile.balance,
-        'transactions': transactions,
-    })
-
+# def login_view(request):
+#     if request.method == "POST":
+#         username = request.POST.get("username")
+#         password = request.POST.get("password")
+#         recaptcha_response = request.POST.get("recaptcha-token")  # Updated
+#         # Verify reCAPTCHA
+#         data = {
+#             'secret': settings.RECAPTCHA_SECRET_KEY,
+#             'response': recaptcha_response,
+#             'remoteip': request.META.get('REMOTE_ADDR'),
+#         }
+#         recaptcha_verification = requests.post(
+#             "https://www.google.com/recaptcha/api/siteverify",
+#             data=data
+#         )
+#         result = recaptcha_verification.json()
+#         # Check reCAPTCHA response
+#         if not result.get("success"):
+#             messages.error(request, "reCAPTCHA validation failed. Please try again.")
+#             return redirect("users:login")  # Redirect back to the login page
+#         # Authenticate user if reCAPTCHA is valid
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             # Redirect to the next URL if provided, else default to user profile
+#             next_url = request.GET.get('next', reverse("users:user"))  # Simplified fallback
+#             return redirect(next_url)
+#         else:
+#             messages.error(request, "Invalid username or password.")
+#     return render(request, "users/login.html")
 
 def login_view(request):
     if request.method == "POST":
@@ -51,70 +70,31 @@ def login_view(request):
     return render(request, "users/login.html")
 
 
-def logout_view(request):
-    logout(request)
-    messages.success(request, "Successfully logged out.")
-    return redirect('users:login')
-
-
-def login_view(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        recaptcha_response = request.POST.get("recaptcha-token")  # Updated
-        # Verify reCAPTCHA
-        data = {
-            'secret': settings.RECAPTCHA_SECRET_KEY,
-            'response': recaptcha_response,
-            'remoteip': request.META.get('REMOTE_ADDR'),
-        }
-        recaptcha_verification = requests.post(
-            "https://www.google.com/recaptcha/api/siteverify",
-            data=data
-        )
-        result = recaptcha_verification.json()
-        # Check reCAPTCHA response
-        if not result.get("success"):
-            messages.error(request, "reCAPTCHA validation failed. Please try again.")
-            return redirect("users:login")  # Redirect back to the login page
-        # Authenticate user if reCAPTCHA is valid
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            # Redirect to the next URL if provided, else default to user profile
-            next_url = request.GET.get('next', reverse("users:user"))  # Simplified fallback
-            return redirect(next_url)
-        else:
-            messages.error(request, "Invalid username or password.")
-    return render(request, "users/login.html")
-
-
-@login_required(login_url='users:login')
 def user_view(request):
-    # Check if the user has a profile, create one if missing
-    if not hasattr(request.user, 'profile'):
-        Profile.objects.create(user=request.user)
-
-    profile = request.user.profile  # Safe to access now
+    profile = request.user.profile
     return render(request, 'users/user.html', {'balance': profile.balance})
 
-
-@login_required(login_url='users:login')
 def top_up(request):
-    # Check if the user has a profile, create one if missing
-    if not hasattr(request.user, 'profile'):
-        Profile.objects.create(user=request.user)
-
-    profile = request.user.profile  # Safe to access now
+    Profile = request.user.profile
     if request.method == 'POST':
         form = UserTopUp(request.POST)
         if form.is_valid():
             amount = form.cleaned_data['amount']
-            profile.balance += amount
-            profile.save()
+            Profile.balance += amount
+            Profile.save()
             Transcation.objects.create(user=request.user, amount=amount)
             messages.success(request, f"${amount} has been successfully added to your balance")
             return redirect('users:user')
     else:
         form = UserTopUp()
-    return render(request, 'users/topup.html', {'form': form, 'balance': profile.balance})
+    return render(request, 'users/topup.html', {'form': form, 'balance': Profile.balance})
+
+@login_required(login_url='users:login')
+def user(request):
+    profile = request.user.profile
+    transactions = Transcation.objects.all().filter(user=request.user).order_by('-created_at')
+    return render(request, "users/user.html", {
+        'user': request.user,
+        'balance': profile.balance,
+        'transactions': transactions,
+    })

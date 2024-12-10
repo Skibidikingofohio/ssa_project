@@ -17,10 +17,9 @@ import urllib.parse
 def transfer_funds(request, group_id, event_id):
     group = get_object_or_404(Group, id=group_id)
     event = get_object_or_404(Event, id=event_id, group=group)
-    insufficient_funds = False
 
     if request.user != group.admin:
-        messages.error(request, "you no admin")
+        messages.error(request, "You're not an admin")
         return redirect('group_detail', group_id=group_id)
     
     archive = event.check_archived()
