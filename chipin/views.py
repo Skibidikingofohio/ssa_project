@@ -34,12 +34,8 @@ def transfer_funds(request, group_id, event_id):
         profile = member.profile
         event_share = event.calculate_share()
         if profile.balance < event_share:
-            insufficient_funds = True
-    
-    if insufficient_funds == True:
-        messages.error(request, f"not all members have sufficinet funds")
-        return redirect('chipin:group_detail', group_id=group.id)
-    
+            messages.error(request, "Insufficient funds")
+   
     with transaction.atomic():
         for member in event.members.all():
             profile = member.profile
