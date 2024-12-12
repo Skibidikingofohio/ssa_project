@@ -1,0 +1,96 @@
+[33mcommit 9641ad24c2f2e1228d0325c77e88b3bac8b5c66a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Thu Dec 12 21:47:07 2024 +1100
+
+    This commit is a mistake
+
+[33mcommit 713753e3adc311b9aa9db57e07ab774257947203[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Tue Dec 10 17:58:38 2024 +1100
+
+    transfer funds fix
+
+[33mcommit bcbae32b3d6417951daac6a065cc635fdb8cc2f1[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Tue Dec 10 17:26:14 2024 +1100
+
+    temporary recaptcha fix
+
+[33mcommit 841cb00b3b2ac1d05764aa1a54cff030d26eba74[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Mon Dec 9 19:22:15 2024 +1100
+
+    Week 8, reCAPTCHA validation failed. Please try again. error
+
+[33mcommit a388d1bffff8c1d574746a6bf15510ce0ef6ed0f[m
+Merge: e5e96f8 d17ce2d
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Thu Dec 5 20:53:45 2024 +1100
+
+    Event Creation and Week 7
+
+[33mcommit e5e96f834a9b7a85a29e51b018f0bb56c87797a1[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Thu Dec 5 20:51:34 2024 +1100
+
+    Event Creation + Some of week 7
+
+[33mcommit d17ce2db99420b05cce4b0374da1f7abfa060ef2[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Fri Nov 22 13:33:25 2024 +1100
+
+    2nd sever error 500
+
+[33mcommit 8b6ecc253ec99bc7cea18d3e4d3a0378a3efda2f[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Fri Nov 22 13:19:42 2024 +1100
+
+    Server error when making event
+
+[33mcommit ac394252f31052b7c245135beb5fc5240523a245[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Fri Nov 22 12:59:33 2024 +1100
+
+    Chat Creation
+
+[33mcommit 55d3e5c8d9bd39ffba3584ab59416cc69028c361[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Mon Nov 18 14:34:32 2024 +1100
+
+    Nicknames replace Email
+
+[33mcommit 1d004bc048940ad28599c7261d1cbffcf0314c09[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Mon Nov 18 14:25:15 2024 +1100
+
+    Refactor Invitation Email Notification
+
+[33mcommit 86fd4616bfc3e3238cc3550662801244b7354973[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Tue Nov 12 12:36:12 2024 +1100
+
+    Refactor Invitation Email Notification
+
+[33mcommit 904fa4aa7681d484318704e7c2c3ea900175e32d[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Tue Nov 12 10:46:07 2024 +1100
+
+    Recaptcha stuff
+
+[33mcommit abb2a41c0886d7f9110238754cf82041d2507c6e[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Sun Nov 10 22:46:26 2024 +1100
+
+    User Registration
+
+[33mcommit d7952a57f9e78dbf2f9c88709832b0c12a735537[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Fri Nov 8 21:08:01 2024 +1100
+
+    Initial commit
+
+[33mcommit 369c83983609c284411ad2b20fd3e4d8fa50d45d[m
+Author: kray siason <ksiasoniii@parrastu.catholic.edu.au>
+Date:   Fri Nov 8 21:00:26 2024 +1100
+
+    Initial commit

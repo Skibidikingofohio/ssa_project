@@ -40,8 +40,8 @@ class Profile(models.Model):
         super().save(*args, **kwargs)    
 
     def __str__(self):
-        return self.user.username
-
+        return f"self.user.username - ${self.balance}" 
+    
 
 class Transcation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
